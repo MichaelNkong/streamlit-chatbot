@@ -2,6 +2,7 @@ import streamlit as st
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
+import os
 
 load_dotenv()
 
@@ -24,7 +25,7 @@ for message in st.session_state.chat_history:
      with st.chat_message(message["role"]):
           st.markdown(message["content"])
 
-llm = ChatOpenAI(model = "gpt-4.1-2025-04-14", temperature=0.0)
+llm = ChatOpenAI(model = "gpt-4.1-2025-04-14",    temperature=0.0, api_key=os.getenv("OPENAI_API_KEY") )
 user_prompt = st.chat_input("Ask chatbot")
 if user_prompt:
     # Show user message

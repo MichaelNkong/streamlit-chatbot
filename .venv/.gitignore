@@ -4,6 +4,3 @@
 # But NOT these files
 !chatbot.py
 !requirements.txt
-
-# Allow .gitignore itself
-!.gitignore
