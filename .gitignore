@@ -1,0 +1,18 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Environment files
+.env
+.env.*
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# IDE files
+.idea/
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
