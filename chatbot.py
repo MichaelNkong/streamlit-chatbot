@@ -1,5 +1,6 @@
 import streamlit as st
 from dotenv import load_dotenv
+from langchain_community.llms.oci_generative_ai import Provider
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -52,19 +53,23 @@ PROVIDERS = {
 }
 
 # Provider dropdown
-provider = st.selectbox(
-    "Select Provider",
-    list(PROVIDERS.keys())
-)
 
-# Model dropdown (updates automatically)
-model = st.selectbox(
-    "Select Model",
-    PROVIDERS[provider]
-)
+# Sidebar configuration
+with st.sidebar:
+    st.header("⚙️ Settings")
 
-st.write(f"Provider: **{provider}**")
-st.write(f"Model: **{model}**")
+    provider = st.selectbox(
+        "Select Provider",
+        list(PROVIDERS.keys())
+    )
+
+    model = st.selectbox(
+        "Select Model",
+        PROVIDERS[provider]
+    )
+
+    st.write(f"Provider: **{provider}**")
+    st.write(f"Model: **{model}**")
 user_prompt = st.chat_input("Ask chatbot")
 if user_prompt:
    if provider == "OpenAI":
