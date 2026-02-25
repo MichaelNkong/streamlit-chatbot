@@ -1,6 +1,0 @@
-# Ignore everything
-*
-
-# But NOT these files
-!chatbot.py
-!requirements.txt
