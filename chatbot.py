@@ -6,6 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
 from langchain_ollama import ChatOllama
+import traceback
 import os
 
 from logic.chathelper import chathelper
@@ -85,7 +86,11 @@ if user_prompt:
           google_api_key=os.getenv("GEMINI_API_KEY"),
           temperature=0
          )
-        chathelper(llm, user_prompt)
+        try:
+            chathelper(llm, user_prompt)
+        except Exception as e:
+            st.error(f"Error: {e}")
+            st.text(traceback.format_exc())
 
    elif provider == "Groq":
         llm = ChatGroq(
@@ -93,7 +98,11 @@ if user_prompt:
            api_key=os.getenv("GROQ_API_KEY"),
            temperature=0
         )
-        chathelper(llm, user_prompt)
+        try:
+            chathelper(llm, user_prompt)
+        except Exception as e:
+            st.error(f"Error: {e}")
+            st.text(traceback.format_exc())
 
    elif provider == "Ollama":
         llm = ChatOllama(
@@ -101,6 +110,11 @@ if user_prompt:
            temperature=0
            # other params...
         )
-        chathelper(llm, user_prompt)
+        try:
+            chathelper(llm, user_prompt)
+        except Exception as e:
+            st.error(f"Error: {e}")
+
+            st.text(traceback.format_exc())
 
 
