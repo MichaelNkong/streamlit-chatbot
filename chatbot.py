@@ -1,8 +1,11 @@
+
+
 import streamlit as st
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
+from langchain_ollama import ChatOllama
 import os
 
 from logic.chathelper import chathelper
@@ -91,3 +94,13 @@ if user_prompt:
            temperature=0
         )
         chathelper(llm, user_prompt)
+
+   elif provider == "Ollama":
+        llm = ChatOllama(
+           model = model,
+           temperature=0
+           # other params...
+        )
+        chathelper(llm, user_prompt)
+
+
