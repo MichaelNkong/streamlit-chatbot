@@ -10,3 +10,6 @@ Install all necessary dependencies with pip
 run streamlit project with:
 streamlit run chatbot.py
 
+API Keys
+For open AI create an API key on openai.com and do same fro groq on grok.com as well as for gemini (google)
+

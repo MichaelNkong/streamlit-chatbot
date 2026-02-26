@@ -1,9 +1,8 @@
 import streamlit as st
 from dotenv import load_dotenv
-from langchain_community.llms.oci_generative_ai import Provider
 from langchain_openai import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
-
+from langchain_groq import ChatGroq
 import os
 
 from logic.chathelper import chathelper
@@ -44,11 +43,8 @@ PROVIDERS = {
     ],
     "Groq": [
         "llama-3.1-8b-instant",
-        "llama-3.3-70b-versatile"
-    ],
-    "Ollama": [
-        "gemma3",
-        "llama3.1"
+        "qwen/qwen3-32b",
+        "llama-3.3-70b-versatile",
     ]
 }
 
@@ -75,7 +71,7 @@ if user_prompt:
    if provider == "OpenAI":
       llm = ChatOpenAI(
         model=model,
-        api_key=os.getenv("OPENAI_API_KEY"),
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
         temperature=0
       )
       chathelper(llm,user_prompt)
@@ -86,4 +82,12 @@ if user_prompt:
           google_api_key=os.getenv("GEMINI_API_KEY"),
           temperature=0
          )
+        chathelper(llm, user_prompt)
+
+   elif provider == "Groq":
+        llm = ChatGroq(
+           model=model,
+           api_key=os.getenv("GROQ_API_KEY"),
+           temperature=0
+        )
         chathelper(llm, user_prompt)
