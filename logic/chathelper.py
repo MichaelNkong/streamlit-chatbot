@@ -7,31 +7,31 @@ def chathelper(llm, user_prompt):
         st.session_state.chat_history = []
 
         # Show user message
-        st.chat_message("user").markdown(user_prompt)
+    st.chat_message("user").markdown(user_prompt)
 
         # Save user message
-        st.session_state.chat_history.append(
+    st.session_state.chat_history.append(
             {"role": "user", "content": user_prompt}
         )
 
         # Build prompt from full chat history
-        prompt = ChatPromptTemplate.from_messages(
+    prompt = ChatPromptTemplate.from_messages(
             st.session_state.chat_history
         )
 
         # Create chain
-        chain = prompt | llm
+    chain = prompt | llm
 
         # Call model
-        response = chain.invoke({})
+    response = chain.invoke({})
 
         # Extract content
-        assistant_message = response.content
+    assistant_message = response.content
 
         # Show assistant message
-        st.chat_message("assistant").markdown(assistant_message)
+    st.chat_message("assistant").markdown(assistant_message)
 
         # Save assistant message
-        st.session_state.chat_history.append(
-            {"role": "assistant", "content": assistant_message}
+    st.session_state.chat_history.append(
+        {"role": "assistant", "content": assistant_message}
         )
