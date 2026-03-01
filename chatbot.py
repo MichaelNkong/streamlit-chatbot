@@ -71,6 +71,7 @@ with st.sidebar:
     st.write(f"Provider: **{provider}**")
     st.write(f"Model: **{model}**")
 user_prompt = st.chat_input("Ask chatbot")
+
 if user_prompt:
    if provider == "OpenAI":
       llm = ChatOpenAI(
@@ -78,7 +79,11 @@ if user_prompt:
         openai_api_key=os.getenv("OPENAI_API_KEY"),
         temperature=0
       )
-      chathelper(llm,user_prompt)
+      try:
+         chathelper(llm, user_prompt)
+      except Exception as e:
+            st.error(f"Error: {e}")
+            st.text(traceback.format_exc())
 
    elif provider == "Gemini":
         llm = ChatGoogleGenerativeAI(
